@@ -126,16 +126,24 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipien
 	end
 	local commands = {
 		["autofarm/"] = function(value)
-			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false)
-			autofarm = boolean
+			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false);
+			shared.autofarm = boolean;
 		end,
 		["notifychange/"] = function(value)
-			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false)
-			notifyChanges = boolean
+			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false);
+			shared.notifyChanges = boolean;
 		end,
 		["broadcastdisaster/"] = function(value)
-			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false)
-			broadcastDisaster = boolean
+			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false);
+			shared.broadcastDisaster = boolean;
+		end,
+		["partcontrol/"] = function(value)
+			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false);
+			shared.partcontrol = boolean;
+		end,
+		["debug/"] = function(value)
+			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false);
+			shared.debug = boolean;
 		end,
 	};
 	for index,value in pairs(commands) do
