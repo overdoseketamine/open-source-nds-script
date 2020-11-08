@@ -6,11 +6,6 @@ Modified by elementemerald#4175
 https://www.roblox.com/games/189707/Natural-Disaster-Survival
 ]]
 
-local broadcastDisaster = false
-local notifyChanges = true
-local autofarm = true
-local prefix = ">";
-
 game:GetService("RunService").Stepped:connect(function()
     -- this function requires a compatible exploit (Synapse, Sentinel, etc.)
     setsimulationradius(math.pow(math.huge,math.huge)*math.huge, math.pow(math.huge,math.huge)*math.huge);
@@ -38,7 +33,7 @@ game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
 	Font = Enum.Font.SourceSansBold
 })
 
-if notifyChanges == false then
+if shared.notifyChanges == false then
 	game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
 		Text = "{System} You currently have the notifyChanges variable set to \'false\', if you want it on please change the value from \'false\' to \'true\'. You can also use the command \'notifychanges/true\'",
 		Color = Color3.fromRGB(255, 85, 85),
@@ -49,7 +44,7 @@ end
 pcall(function()
 	coroutine.resume(coroutine.create(function()
 		SurvivalTag = game:GetService("Players").LocalPlayer.Character:WaitForChild("SurvivalTag")
-		if notifyChanges == true then
+		if shared.notifyChanges == true then
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
 				Text = string.format("{System} The upcoming disaster will be a %s", SurvivalTag.Value),
 				Color = Color3.fromRGB(255, 235, 85),
@@ -63,14 +58,14 @@ pcall(function()
 				})
 			end)
 		end
-		if broadcastDisaster == true then
+		if shared.broadcastDisaster == true then
 			game:GetService("ReplicatedStorage")["DefaultChatSystemChatEvents"].SayMessageRequest:FireServer(string.format("[LuminentialBot]: The upcoming disaster will be a %s", SurvivalTag.Value),"All")
 		end
 	end))
 	coroutine.resume(coroutine.create(function()
 		local FallDamageScript = game:GetService("Players").LocalPlayer.Character:WaitForChild("FallDamageScript")
 		FallDamageScript:Destroy()
-		if notifyChanges == true then
+		if shared.notifyChanges == true then
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
 				Text = "{System} FallDamageScript has been destroyed.",
 				Color = Color3.fromRGB(255, 235, 85),
@@ -83,7 +78,7 @@ end)
 game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(Character)
 	coroutine.resume(coroutine.create(function()
 		SurvivalTag = Character:WaitForChild("SurvivalTag")
-		if notifyChanges == true then
+		if shared.notifyChanges == true then
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
 				Text = string.format("{System} The upcoming disaster will be a %s", SurvivalTag.Value),
 				Color = Color3.fromRGB(255, 235, 85),
@@ -97,14 +92,14 @@ game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(Character
 				})
 			end)
 		end
-		if broadcastDisaster == true then
+		if shared.broadcastDisaster == true then
 			game:GetService("ReplicatedStorage")["DefaultChatSystemChatEvents"].SayMessageRequest:FireServer(string.format("[LuminentialBot]: The upcoming disaster will be a %s", SurvivalTag.Value),"All")
 		end
 	end))
 	coroutine.resume(coroutine.create(function()
 		local FallDamageScript = Character:WaitForChild("FallDamageScript")
 		FallDamageScript:Destroy()
-		if notifyChanges == true then
+		if shared.notifyChanges == true then
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
 				Text = "{System} FallDamageScript has been destroyed.",
 				Color = Color3.fromRGB(255, 235, 85),
@@ -154,7 +149,7 @@ end)
 
 game:GetService("RunService").RenderStepped:Connect(function()
 	pcall(function()
-		if not autofarm then
+		if not shared.autofarm then
 			return error("Autofarm is not enabled!")
 		end
 		game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").CFrame = CFrame.new(-280, 180, 385) * CFrame.Angles(math.rad(0), math.rad(0), math.rad(0))
@@ -164,7 +159,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 end)
 
 game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
-    if msg == prefix .."tpua" then
+    if msg == shared.prefix .."tpua" then
         for i = 1, #ua do
             ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
         end
