@@ -233,7 +233,7 @@ uis.InputBegan:connect(function(key, gameprocessed)
 			end
 		end
 	elseif key.KeyCode == Enum.KeyCode.LeftAlt then -- get votes
-		pcall(function()
+		local s,e = pcall(function()
 			local map1 = game:GetService("ReplicatedStorage").Choice1;
 			local map2 = game:GetService("ReplicatedStorage").Choice2;
 			local map3 = game:GetService("ReplicatedStorage").Choice3;
@@ -244,5 +244,20 @@ uis.InputBegan:connect(function(key, gameprocessed)
 				Font = Enum.Font.SourceSansBold
 			});
 		end);
+		if not s then
+			if shared.debug == true then
+				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+					Text = string.format("{System} An error occured while getting votes for maps. | Debug: %s", e),
+					Color = Color3.fromRGB(255, 85, 85),
+					Font = Enum.Font.SourceSansBold
+				});
+			else
+				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+					Text = "{System} An error occured while getting votes for maps.",
+					Color = Color3.fromRGB(255, 85, 85),
+					Font = Enum.Font.SourceSansBold
+				});
+			end
+		end;
 	end;
 end);
