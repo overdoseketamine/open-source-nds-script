@@ -192,7 +192,6 @@ game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
 end);
 
 uis.InputBegan:connect(function(key, gameprocessed)
-	print(string.format("keydown: %s", key.KeyCode.Name));
 	if key.KeyCode == Enum.KeyCode.LeftControl then
 		SurvivalTag = game:GetService("Players").LocalPlayer.Character:WaitForChild("SurvivalTag");
 		game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
