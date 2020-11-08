@@ -6,13 +6,13 @@ Modified by elementemerald#4175
 https://www.roblox.com/games/189707/Natural-Disaster-Survival
 ]]
 
+if shared.partcontrol == true then
 game:GetService("RunService").Stepped:connect(function()
     -- this function requires a compatible exploit (Synapse, Sentinel, etc.)
     setsimulationradius(math.pow(math.huge,math.huge)*math.huge, math.pow(math.huge,math.huge)*math.huge);
     wait(9e9);
 end);
 
-if shared.partcontrol == true then
 shared.ua = {};
   
 for index, part in pairs(workspace:GetDescendants()) do
