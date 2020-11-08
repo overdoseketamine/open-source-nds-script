@@ -12,18 +12,18 @@ game:GetService("RunService").Stepped:connect(function()
     wait(9e9);
 end);
 
-local ua = {}
+shared.ua = {}
   
 for index, part in pairs(workspace:GetDescendants()) do
     if part:IsA("Part") and part.Anchored == false and part:IsDescendantOf(game:GetService("Players").LocalPlayer.Character) == false then
-        table.insert(ua,part)
+        table.insert(shared.ua,part)
     end
 end
   
-for i = 1, #ua do
-    ua[i].Parent = workspace
+for i = 1, #shared.ua do
+    shared.ua[i].Parent = workspace
     local BD = Instance.new("BodyPosition") -- body position for the parts
-    BD.Parent = ua[i]
+    BD.Parent = shared.ua[i]
     BD.Name = "BD"
 end
 
@@ -160,8 +160,8 @@ end)
 
 game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
     if msg == shared.prefix .."tpua" then
-        for i = 1, #ua do
-            ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
+        for i = 1, #shared.ua do
+            shared.ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
         end
     end
 end);
