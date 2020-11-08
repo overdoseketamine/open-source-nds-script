@@ -174,7 +174,8 @@ game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
 	if msg == shared.prefix .."reua" then
 		if shared.partcontrol == true then
 		for k in pairs(shared.ua) do
-			shared.ua[k]:Destroy();
+			--shared.ua[k]:Destroy();
+			shared.ua[k] = nil;
 		end
 
 		for index, part in pairs(workspace:GetDescendants()) do
