@@ -193,11 +193,28 @@ end);
 
 uis.InputBegan:connect(function(key, gameprocessed)
 	if key.KeyCode == Enum.KeyCode.LeftControl then
-		SurvivalTag = game:GetService("Players").LocalPlayer.Character:WaitForChild("SurvivalTag");
-		game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
-			Text = string.format("{System} The disaster tag is currently %s", tostring(SurvivalTag.Value)),
-			Color = Color3.fromRGB(255, 235, 85),
-			Font = Enum.Font.SourceSansBold
-		});
+		local s,e = pcall(function()
+			SurvivalTag = game:GetService("Players").LocalPlayer.Character["SurvivalTag"];
+			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+				Text = string.format("{System} The disaster tag is currently %s", tostring(SurvivalTag.Value)),
+				Color = Color3.fromRGB(255, 235, 85),
+				Font = Enum.Font.SourceSansBold
+			});
+		end);
+		if not s then
+			if shared.debug == true then
+				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+					Text = string.format("{System} There is no disaster at the moment. | Debug: %s", e),
+					Color = Color3.fromRGB(255, 85, 85),
+					Font = Enum.Font.SourceSansBold
+				});
+			else
+				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+					Text = "{System} There is no disaster at the moment.",
+					Color = Color3.fromRGB(255, 85, 85),
+					Font = Enum.Font.SourceSansBold
+				});
+			end
+		end
 	end;
 end);
