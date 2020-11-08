@@ -234,9 +234,9 @@ uis.InputBegan:connect(function(key, gameprocessed)
 		end
 	elseif key.KeyCode == Enum.KeyCode.LeftAlt then -- get votes
 		local s,e = pcall(function()
-			local map1 = game:GetService("ReplicatedStorage").Choice1;
-			local map2 = game:GetService("ReplicatedStorage").Choice2;
-			local map3 = game:GetService("ReplicatedStorage").Choice3;
+			local map1 = game:GetService("ReplicatedStorage").MapVotes.Choice1;
+			local map2 = game:GetService("ReplicatedStorage").MapVotes.Choice2;
+			local map3 = game:GetService("ReplicatedStorage").MapVotes.Choice3;
 
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
 				Text = string.format("{System | InputBegan} Votes for maps - %s: %d, %s: %d, %s: %d", map1.Value, #map1:GetChildren(), map2.Value, #map2:GetChildren(), map3.Value, #map3:GetChildren()),
