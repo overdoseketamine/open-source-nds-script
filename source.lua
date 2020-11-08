@@ -186,5 +186,12 @@ game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
 			shared.ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
 		end
 		end
+	elseif msg == shared.prefix .."getdisaster" then
+		SurvivalTag = Character:WaitForChild("SurvivalTag");
+		game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+			Text = string.format("{System} The disaster tag is currently %s", tostring(SurvivalTag.Value)),
+			Color = Color3.fromRGB(255, 235, 85),
+			Font = Enum.Font.SourceSansBold
+		});
 	end
 end);
