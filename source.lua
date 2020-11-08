@@ -12,7 +12,8 @@ game:GetService("RunService").Stepped:connect(function()
     wait(9e9);
 end);
 
-shared.ua = {}
+if shared.partcontrol == true then
+shared.ua = {};
   
 for index, part in pairs(workspace:GetDescendants()) do
     if part:IsA("Part") and part.Anchored == false and part:IsDescendantOf(game:GetService("Players").LocalPlayer.Character) == false then
@@ -25,6 +26,7 @@ for i = 1, #shared.ua do
     local BD = Instance.new("BodyPosition") -- body position for the parts
     BD.Parent = shared.ua[i]
     BD.Name = "BD"
+end
 end
 
 game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
@@ -160,6 +162,7 @@ end)
 
 game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
 	if msg == shared.prefix .."reua" then
+		if shared.partcontrol == true then
 		for k in pairs(shared.ua) do
 			shared.ua[k] = nil;
 		end
@@ -176,9 +179,12 @@ game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
 			BD.Parent = shared.ua[i]
 			BD.Name = "BD"
 		end
+		end
 	elseif msg == shared.prefix .."tpua" then
+		if shared.partcontrol == true then
 		for i = 1, #shared.ua do
 			shared.ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
+		end
 		end
 	end
 end);
