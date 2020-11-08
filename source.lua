@@ -159,9 +159,26 @@ game:GetService("RunService").RenderStepped:Connect(function()
 end)
 
 game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
-    if msg == shared.prefix .."tpua" then
-        for i = 1, #shared.ua do
-            shared.ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
-        end
-    end
+	if msg == shared.prefix .."reua" then
+		for k in pairs(shared.ua) do
+			shared.ua[k] = nil;
+		end
+
+		for index, part in pairs(workspace:GetDescendants()) do
+			if part:IsA("Part") and part.Anchored == false and part:IsDescendantOf(game:GetService("Players").LocalPlayer.Character) == false then
+				table.insert(shared.ua,part)
+			end
+		end
+		  
+		for i = 1, #shared.ua do
+			shared.ua[i].Parent = workspace
+			local BD = Instance.new("BodyPosition") -- body position for the parts
+			BD.Parent = shared.ua[i]
+			BD.Name = "BD"
+		end
+	elseif msg == shared.prefix .."tpua" then
+		for i = 1, #shared.ua do
+			shared.ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
+		end
+	end
 end);
