@@ -6,6 +6,8 @@ Modified by elementemerald#4175
 https://www.roblox.com/games/189707/Natural-Disaster-Survival
 ]]
 
+local uis = game:GetService("UserInputService");
+
 if shared.partcontrol == true then
 game:GetService("RunService").Stepped:connect(function()
     -- this function requires a compatible exploit (Synapse, Sentinel, etc.)
@@ -186,12 +188,16 @@ game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
 			shared.ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
 		end
 		end
-	elseif msg == shared.prefix .."getdisaster" then
+	end
+end);
+
+uis.InputBegan:connect(function(key, gameprocessed)
+	if key.KeyCode == Enum.KeyCode.LeftControl then
 		SurvivalTag = game:GetService("Players").LocalPlayer.Character:WaitForChild("SurvivalTag");
 		game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
 			Text = string.format("{System} The disaster tag is currently %s", tostring(SurvivalTag.Value)),
 			Color = Color3.fromRGB(255, 235, 85),
 			Font = Enum.Font.SourceSansBold
 		});
-	end
+	end;
 end);
