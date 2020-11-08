@@ -187,7 +187,7 @@ game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
 		end
 		end
 	elseif msg == shared.prefix .."getdisaster" then
-		SurvivalTag = Character:WaitForChild("SurvivalTag");
+		SurvivalTag = game:GetService("Players").LocalPlayer.Character:WaitForChild("SurvivalTag");
 		game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
 			Text = string.format("{System} The disaster tag is currently %s", tostring(SurvivalTag.Value)),
 			Color = Color3.fromRGB(255, 235, 85),
