@@ -38,7 +38,7 @@ game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
 })
 
 game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
-	Text = "{System} This is the dev build of the NDS Script. If you want a stable build, please switch over to the main build. You might experience bugs and/or crashes.",
+	Text = "{System} This is the dev build of the NDS Script. If you want a stable build, please switch over to the main build. You may or may not experience bugs and/or crashes.",
 	Color = Color3.fromRGB(0, 102, 255),
 	Font = Enum.Font.SourceSansBold
 });
