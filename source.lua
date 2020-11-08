@@ -6,6 +6,8 @@ Modified by elementemerald#4175
 https://www.roblox.com/games/189707/Natural-Disaster-Survival
 ]]
 
+local uis = game:GetService("UserInputService");
+
 if shared.partcontrol == true then
 game:GetService("RunService").Stepped:connect(function()
     -- this function requires a compatible exploit (Synapse, Sentinel, etc.)
@@ -124,16 +126,24 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipien
 	end
 	local commands = {
 		["autofarm/"] = function(value)
-			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false)
-			autofarm = boolean
+			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false);
+			shared.autofarm = boolean;
 		end,
 		["notifychange/"] = function(value)
-			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false)
-			notifyChanges = boolean
+			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false);
+			shared.notifyChanges = boolean;
 		end,
 		["broadcastdisaster/"] = function(value)
-			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false)
-			broadcastDisaster = boolean
+			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false);
+			shared.broadcastDisaster = boolean;
+		end,
+		["partcontrol/"] = function(value)
+			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false);
+			shared.partcontrol = boolean;
+		end,
+		["debug/"] = function(value)
+			local boolean = (string.sub(value,1,4) == "true" and true) or (string.sub(value,1,5) == "false" and false);
+			shared.debug = boolean;
 		end,
 	};
 	for index,value in pairs(commands) do
@@ -164,6 +174,7 @@ game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
 	if msg == shared.prefix .."reua" then
 		if shared.partcontrol == true then
 		for k in pairs(shared.ua) do
+			--shared.ua[k]:Destroy();
 			shared.ua[k] = nil;
 		end
 
@@ -186,12 +197,33 @@ game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
 			shared.ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
 		end
 		end
-	elseif msg == shared.prefix .."getdisaster" then
-		SurvivalTag = game:GetService("Players").LocalPlayer.Character:WaitForChild("SurvivalTag");
-		game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
-			Text = string.format("{System} The disaster tag is currently %s", tostring(SurvivalTag.Value)),
-			Color = Color3.fromRGB(255, 235, 85),
-			Font = Enum.Font.SourceSansBold
-		});
 	end
+end);
+
+uis.InputBegan:connect(function(key, gameprocessed)
+	if key.KeyCode == Enum.KeyCode.LeftControl then
+		local s,e = pcall(function()
+			SurvivalTag = game:GetService("Players").LocalPlayer.Character["SurvivalTag"];
+			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+				Text = string.format("{System | InputBegan} The disaster tag is currently %s", tostring(SurvivalTag.Value)),
+				Color = Color3.fromRGB(255, 235, 85),
+				Font = Enum.Font.SourceSansBold
+			});
+		end);
+		if not s then
+			if shared.debug == true then
+				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+					Text = string.format("{System | InputBegan} There is no disaster at the moment or you have joined during a disaster. | Debug: %s", e),
+					Color = Color3.fromRGB(255, 85, 85),
+					Font = Enum.Font.SourceSansBold
+				});
+			else
+				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+					Text = "{System | InputBegan} There is no disaster at the moment or you have joined during a disaster.",
+					Color = Color3.fromRGB(255, 85, 85),
+					Font = Enum.Font.SourceSansBold
+				});
+			end
+		end
+	end;
 end);
