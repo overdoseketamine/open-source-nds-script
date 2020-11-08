@@ -176,7 +176,8 @@ game:GetService("RunService").RenderStepped:Connect(function()
 	end)
 end)
 
-game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
+-- integrating this into the main chatted event soon
+--[[game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
 	if msg == shared.prefix .."reua" then
 		if shared.partcontrol == true then
 		for k in pairs(shared.ua) do
@@ -192,7 +193,7 @@ game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
 		  
 		for i = 1, #shared.ua do
 			shared.ua[i].Parent = workspace
-			local BD = Instance.new("BodyPosition") -- body position for the parts
+			local BD = Instance.new("BodyPosition")
 			BD.Parent = shared.ua[i]
 			BD.Name = "BD"
 		end
@@ -204,7 +205,7 @@ game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
 		end
 		end
 	end
-end);
+end);]]
 
 uis.InputBegan:connect(function(key, gameprocessed)
 	if key.KeyCode == Enum.KeyCode.LeftControl then
@@ -231,5 +232,17 @@ uis.InputBegan:connect(function(key, gameprocessed)
 				});
 			end
 		end
+	elseif key.KeyCode == Enum.KeyCode.LeftAlt then -- get votes
+		pcall(function()
+			local map1 = game:GetService("ReplicatedStorage").Choice1;
+			local map2 = game:GetService("ReplicatedStorage").Choice2;
+			local map3 = game:GetService("ReplicatedStorage").Choice3;
+
+			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+				Text = string.format("{System | InputBegan} Votes for maps - %s: %d, %s: %d, %s: %d", map1.Value, #map1:GetChildren(), map2.Value, #map2:GetChildren(), map3.Value, #map3:GetChildren()),
+				Color = Color3.fromRGB(255, 235, 85),
+				Font = Enum.Font.SourceSansBold
+			});
+		end);
 	end;
 end);
