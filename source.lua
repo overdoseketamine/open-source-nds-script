@@ -203,6 +203,33 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipien
 				Color = Color3.fromRGB(255, 235, 85),
 				Font = Enum.Font.SourceSansBold
 			});
+		elseif msg == shared.prefix .."getvotes" then
+			local s,e = pcall(function()
+				local map1 = game:GetService("ReplicatedStorage").MapVotes.Choice1;
+				local map2 = game:GetService("ReplicatedStorage").MapVotes.Choice2;
+				local map3 = game:GetService("ReplicatedStorage").MapVotes.Choice3;
+	
+				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+					Text = string.format("{System | InputBegan} Votes for maps - %s: %d, %s: %d, %s: %d", map1.Value, #map1:GetChildren(), map2.Value, #map2:GetChildren(), map3.Value, #map3:GetChildren()),
+					Color = Color3.fromRGB(255, 235, 85),
+					Font = Enum.Font.SourceSansBold
+				});
+			end);
+			if not s then
+				if shared.debug == true then
+					game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+						Text = string.format("{System} An error occured while getting votes for maps. | Debug: %s", e),
+						Color = Color3.fromRGB(255, 85, 85),
+						Font = Enum.Font.SourceSansBold
+					});
+				else
+					game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+						Text = "{System} An error occured while getting votes for maps.",
+						Color = Color3.fromRGB(255, 85, 85),
+						Font = Enum.Font.SourceSansBold
+					});
+				end
+			end;
 		end
 	end);
 end)
@@ -257,33 +284,6 @@ uis.InputBegan:connect(function(key, gameprocessed)
 				});
 			end
 		end
-	elseif key.KeyCode == Enum.KeyCode.LeftAlt then -- get votes
-		local s,e = pcall(function()
-			local map1 = game:GetService("ReplicatedStorage").MapVotes.Choice1;
-			local map2 = game:GetService("ReplicatedStorage").MapVotes.Choice2;
-			local map3 = game:GetService("ReplicatedStorage").MapVotes.Choice3;
-
-			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
-				Text = string.format("{System | InputBegan} Votes for maps - %s: %d, %s: %d, %s: %d", map1.Value, #map1:GetChildren(), map2.Value, #map2:GetChildren(), map3.Value, #map3:GetChildren()),
-				Color = Color3.fromRGB(255, 235, 85),
-				Font = Enum.Font.SourceSansBold
-			});
-		end);
-		if not s then
-			if shared.debug == true then
-				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
-					Text = string.format("{System} An error occured while getting votes for maps. | Debug: %s", e),
-					Color = Color3.fromRGB(255, 85, 85),
-					Font = Enum.Font.SourceSansBold
-				});
-			else
-				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
-					Text = "{System} An error occured while getting votes for maps.",
-					Color = Color3.fromRGB(255, 85, 85),
-					Font = Enum.Font.SourceSansBold
-				});
-			end
-		end;
 	end;
 	end;
 end);
