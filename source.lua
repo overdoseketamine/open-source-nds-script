@@ -221,8 +221,10 @@ end)
 uis.InputBegan:connect(function(key, gameprocessed)
 	if key.UserInputType == Enum.UserInputType.MouseButton1 and uis:IsKeyDown(Enum.KeyCode.RightAlt) then
 		if shared.partcontrol == true then
+		local vect = Vector3.new(mouse.Hit.p);
+		print(vect);
 		for i = 1, #shared.ua do
-			shared.ua[i].BD.Position = Vector3.new(mouse.Hit.p);
+			shared.ua[i].BD.Position = vect;
 		end
 		end
 	elseif key.UserInputType == Enum.UserInputType.Keyboard then
