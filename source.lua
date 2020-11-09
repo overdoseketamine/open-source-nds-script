@@ -7,6 +7,7 @@ https://www.roblox.com/games/189707/Natural-Disaster-Survival
 ]]
 
 local uis = game:GetService("UserInputService");
+local mouse = game:GetService("Players").LocalPlayer:GetMouse();
 
 if shared.partcontrol == true then
 game:GetService("RunService").Stepped:connect(function()
@@ -190,7 +191,7 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipien
 				Color = Color3.fromRGB(255, 235, 85),
 				Font = Enum.Font.SourceSansBold
 			});
-		elseif msg == shared.prefix .."tpua" then
+		elseif msg == shared.prefix .."tpuauser" then
 			if shared.partcontrol == true then
 			for i = 1, #shared.ua do
 				shared.ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
@@ -218,6 +219,13 @@ game:GetService("RunService").RenderStepped:Connect(function()
 end)
 
 uis.InputBegan:connect(function(key, gameprocessed)
+	if key.UserInputType == Enum.UserInputType.MouseButton1 and uis:IsKeyDown(Enum.KeyCode.RightControl) then
+		for index, part in pairs(workspace:GetDescendants()) do
+			if part:IsA("Part") and part.Anchored == false and part:IsDescendantOf(game:GetService("Players").LocalPlayer.Character) == false then
+				part.CFrame = CFrame.new(mouse.Hit.p);
+			end
+		end
+	elseif key.UserInputType == Enum.UserInputType.Keyboard then
 	if key.KeyCode == Enum.KeyCode.LeftControl then
 		local s,e = pcall(function()
 			SurvivalTag = game:GetService("Players").LocalPlayer.Character["SurvivalTag"];
@@ -269,5 +277,6 @@ uis.InputBegan:connect(function(key, gameprocessed)
 				});
 			end
 		end;
+	end;
 	end;
 end);
