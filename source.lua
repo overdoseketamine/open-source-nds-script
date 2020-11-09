@@ -12,7 +12,7 @@ if shared.partcontrol == true then
 game:GetService("RunService").Stepped:connect(function()
     -- this function requires a compatible exploit (Synapse, Sentinel, etc.)
     setsimulationradius(math.pow(math.huge,math.huge)*math.huge, math.pow(math.huge,math.huge)*math.huge);
-    wait(9e9);
+    wait();
 end);
 
 shared.ua = {};
