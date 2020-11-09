@@ -184,12 +184,24 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipien
 				BD.Name = "BD"
 			end
 			end
+			
+			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+				Text = "{System} Successfully refreshed the unanchored parts.",
+				Color = Color3.fromRGB(255, 235, 85),
+				Font = Enum.Font.SourceSansBold
+			});
 		elseif msg == shared.prefix .."tpua" then
 			if shared.partcontrol == true then
 			for i = 1, #shared.ua do
 				shared.ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
 			end
 			end
+
+			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+				Text = "{System} The unanchored parts are now teleporting to your location.",
+				Color = Color3.fromRGB(255, 235, 85),
+				Font = Enum.Font.SourceSansBold
+			});
 		end
 	end);
 end)
