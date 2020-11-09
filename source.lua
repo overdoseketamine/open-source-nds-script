@@ -232,8 +232,8 @@ uis.InputBegan:connect(function(key, gameprocessed)
 		local s,e = pcall(function()
 			SurvivalTag = game:GetService("Players").LocalPlayer.Character["SurvivalTag"];
 			if tostring(SurvivalTag.Value) == "Sandstorm" then
-				if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("SandstormGui") ~= nil then
-					game:GetService("Players").LocalPlayer.PlayerGui["SandstormGui"]:Destroy();
+				if game:GetService("StarterGui"):FindFirstChild("SandstormGui") ~= nil then
+					game:GetService("StarterGui")["SandstormGui"]:Destroy();
 				end
 			end
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
