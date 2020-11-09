@@ -232,7 +232,9 @@ uis.InputBegan:connect(function(key, gameprocessed)
 		local s,e = pcall(function()
 			SurvivalTag = game:GetService("Players").LocalPlayer.Character["SurvivalTag"];
 			if tostring(SurvivalTag.Value) == "Sandstorm" then
-				game:GetService("Players").LocalPlayer.PlayerGui.SandstormGui:Destroy();
+				if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("SandstormGui") ~= nil then
+					game:GetService("Players").LocalPlayer.PlayerGui["SandstormGui"]:Destroy();
+				end
 			end
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
 				Text = string.format("{System | InputBegan} The disaster tag is currently %s", tostring(SurvivalTag.Value)),
@@ -243,7 +245,7 @@ uis.InputBegan:connect(function(key, gameprocessed)
 		if not s then
 			if shared.debug == true then
 				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
-					Text = string.format("{System | InputBegan} There is no disaster at the moment or you have joined during a disaster. | Debug: %s", e),
+					Text = string.format("{System | InputBegan} There is no disaster at the moment, you have joined during a disaster or another error occurred. | Debug: %s", e),
 					Color = Color3.fromRGB(255, 85, 85),
 					Font = Enum.Font.SourceSansBold
 				});
