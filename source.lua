@@ -127,7 +127,7 @@ game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(Character
 end)
 
 game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipient)
-	if typeof(Recipient) == "Instance" and table.find({"autofarm","notifychanges","broadcastdisaster"}) then
+	--[[if typeof(Recipient) == "Instance" and table.find({"autofarm","notifychanges","broadcastdisaster"}) then
 		return
 	end
 	local commands = {
@@ -162,7 +162,36 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipien
 				Font = Enum.Font.SourceSansBold
 			})
 		end
-	end
+	end]]
+	game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
+		if msg == shared.prefix .."reua" then
+			if shared.partcontrol == true then
+			for k in pairs(shared.ua) do
+				--shared.ua[k]:Destroy();
+				shared.ua[k] = nil;
+			end
+	
+			for index, part in pairs(workspace:GetDescendants()) do
+				if part:IsA("Part") and part.Anchored == false and part:IsDescendantOf(game:GetService("Players").LocalPlayer.Character) == false then
+					table.insert(shared.ua,part)
+				end
+			end
+			  
+			for i = 1, #shared.ua do
+				shared.ua[i].Parent = workspace
+				local BD = Instance.new("BodyPosition")
+				BD.Parent = shared.ua[i]
+				BD.Name = "BD"
+			end
+			end
+		elseif msg == shared.prefix .."tpua" then
+			if shared.partcontrol == true then
+			for i = 1, #shared.ua do
+				shared.ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
+			end
+			end
+		end
+	end);
 end)
 
 game:GetService("RunService").RenderStepped:Connect(function()
@@ -175,37 +204,6 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Velocity = Vector3.new(0, 0, 0)
 	end)
 end)
-
--- integrating this into the main chatted event soon
---[[game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
-	if msg == shared.prefix .."reua" then
-		if shared.partcontrol == true then
-		for k in pairs(shared.ua) do
-			--shared.ua[k]:Destroy();
-			shared.ua[k] = nil;
-		end
-
-		for index, part in pairs(workspace:GetDescendants()) do
-			if part:IsA("Part") and part.Anchored == false and part:IsDescendantOf(game:GetService("Players").LocalPlayer.Character) == false then
-				table.insert(shared.ua,part)
-			end
-		end
-		  
-		for i = 1, #shared.ua do
-			shared.ua[i].Parent = workspace
-			local BD = Instance.new("BodyPosition")
-			BD.Parent = shared.ua[i]
-			BD.Name = "BD"
-		end
-		end
-	elseif msg == shared.prefix .."tpua" then
-		if shared.partcontrol == true then
-		for i = 1, #shared.ua do
-			shared.ua[i].BD.Position = game:GetService("Players").LocalPlayer.Character.HumanoidRootPart.Position;
-		end
-		end
-	end
-end);]]
 
 uis.InputBegan:connect(function(key, gameprocessed)
 	if key.KeyCode == Enum.KeyCode.LeftControl then
