@@ -219,7 +219,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
 end)
 
 uis.InputBegan:connect(function(key, gameprocessed)
-	if key.UserInputType == Enum.UserInputType.MouseButton1 and uis:IsKeyDown(Enum.KeyCode.RightAlt) then
+	if key.UserInputType == Enum.UserInputType.MouseButton1 and shared.tppartkey and uis:IsKeyDown(shared.tppartkey) then
 		if shared.partcontrol == true then
 		local vect = Vector3.new(mouse.Hit.p);
 		print(vect);
@@ -231,6 +231,9 @@ uis.InputBegan:connect(function(key, gameprocessed)
 	if key.KeyCode == Enum.KeyCode.LeftControl then
 		local s,e = pcall(function()
 			SurvivalTag = game:GetService("Players").LocalPlayer.Character["SurvivalTag"];
+			if SurvivalTag == "Sandstorm" then
+				game:GetService("Players").LocalPlayer.PlayerGui.SandstormGui:Destroy();
+			end
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
 				Text = string.format("{System | InputBegan} The disaster tag is currently %s", tostring(SurvivalTag.Value)),
 				Color = Color3.fromRGB(255, 235, 85),
