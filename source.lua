@@ -231,7 +231,7 @@ uis.InputBegan:connect(function(key, gameprocessed)
 	if key.KeyCode == Enum.KeyCode.LeftControl then
 		local s,e = pcall(function()
 			SurvivalTag = game:GetService("Players").LocalPlayer.Character["SurvivalTag"];
-			if SurvivalTag == "Sandstorm" then
+			if tostring(SurvivalTag.Value) == "Sandstorm" then
 				game:GetService("Players").LocalPlayer.PlayerGui.SandstormGui:Destroy();
 			end
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
