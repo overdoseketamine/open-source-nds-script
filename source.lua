@@ -221,10 +221,8 @@ end)
 uis.InputBegan:connect(function(key, gameprocessed)
 	if key.UserInputType == Enum.UserInputType.MouseButton1 and uis:IsKeyDown(Enum.KeyCode.RightAlt) then
 		if shared.partcontrol == true then
-		for index, part in pairs(workspace:GetDescendants()) do
-			if part:IsA("Part") and part.Anchored == false and part:IsDescendantOf(game:GetService("Players").LocalPlayer.Character) == false then
-				part.CFrame = CFrame.new(mouse.Hit.p);
-			end
+		for i = 1, #shared.ua do
+			shared.ua[i].BD.CFrame = CFrame.new(mouse.Hit.p);
 		end
 		end
 	elseif key.UserInputType == Enum.UserInputType.Keyboard then
