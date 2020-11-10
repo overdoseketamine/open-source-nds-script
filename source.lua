@@ -247,7 +247,7 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
 				local map3 = game:GetService("ReplicatedStorage").MapVotes.Choice3;
 	
 				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
-					Text = string.format("{System | InputBegan} Votes for maps - %s: %d, %s: %d, %s: %d", map1.Value, #map1:GetChildren(), map2.Value, #map2:GetChildren(), map3.Value, #map3:GetChildren()),
+					Text = string.format("{System} Votes for maps - %s: %d, %s: %d, %s: %d", map1.Value, #map1:GetChildren(), map2.Value, #map2:GetChildren(), map3.Value, #map3:GetChildren()),
 					Color = Color3.fromRGB(255, 235, 85),
 					Font = Enum.Font.SourceSansBold
 				});
