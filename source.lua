@@ -165,7 +165,44 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipien
 		end
 	end]]
 	game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
-		if msg == shared.prefix .."reua" then
+		local cmds = [
+			{
+				["name"] = "help",
+				["desc"] = "Displays this message.",
+				["enabled"] = true
+			},
+			{
+				["name"] = "reua",
+				["desc"] = "Refreshes unanchored parts.",
+				["enabled"] = shared.partcontrol
+			},
+			{
+				["name"] = "tpuauser",
+				["desc"] = "Teleports all of the unanchored parts to the local player.",
+				["enabled"] = shared.partcontrol
+			},
+			{
+				["name"] = "getvotes",
+				["desc"] = "Get votes for next map.",
+				["enabled"] = true
+			}
+		]
+
+		if msg == shared.prefix .."help" then
+			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+				Text = "{System} Available commands:",
+				Color = Color3.fromRGB(255, 235, 85),
+				Font = Enum.Font.SourceSansBold
+			});
+
+			for i = 1, #cmds do
+				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+					Text = string.format("{System} %s - %s || IsEnabled: %s", cmds[i].name, cmds[i].desc, tostring(cmds[i].enabled)),
+					Color = Color3.fromRGB(255, 235, 85),
+					Font = Enum.Font.SourceSansBold
+				});
+			end
+		elseif msg == shared.prefix .."reua" then
 			if shared.partcontrol == true then
 			for k in pairs(shared.ua) do
 				--shared.ua[k]:Destroy();
