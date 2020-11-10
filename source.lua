@@ -127,7 +127,7 @@ game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(Character
 	end))
 end)
 
-game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipient)
+game:GetService("Players").LocalPlayer.Chatted:Connect(function(msg)
 	--[[if typeof(Recipient) == "Instance" and table.find({"autofarm","notifychanges","broadcastdisaster"}) then
 		return
 	end
