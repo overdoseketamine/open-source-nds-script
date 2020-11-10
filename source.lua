@@ -165,7 +165,7 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipien
 		end
 	end]]
 	--game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
-	local cmds = [
+	local cmds = {
 			{
 				["name"] = "help",
 				["desc"] = "Displays this message.",
@@ -186,7 +186,7 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipien
 				["desc"] = "Get votes for next map.",
 				["enabled"] = true
 			}
-		]
+		};
 
 		if msg == shared.prefix .."help" then
 			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
