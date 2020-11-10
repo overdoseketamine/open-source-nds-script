@@ -28,7 +28,8 @@ for i = 1, #shared.ua do
     shared.ua[i].Parent = workspace
     local BD = Instance.new("BodyPosition") -- body position for the parts
     BD.Parent = shared.ua[i]
-    BD.Name = "BD"
+	BD.Name = "BD"
+	BD.MaxForce = Vector.new(math.huge, math.huge, math.huge); -- faster parts i think?
 end
 end
 
