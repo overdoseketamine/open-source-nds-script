@@ -164,8 +164,8 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipien
 			})
 		end
 	end]]
-	game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
-		local cmds = [
+	--game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
+	local cmds = [
 			{
 				["name"] = "help",
 				["desc"] = "Displays this message.",
@@ -268,7 +268,6 @@ game:GetService("Players").LocalPlayer.Chatted:Connect(function(Message,Recipien
 				end
 			end;
 		end
-	end);
 end)
 
 game:GetService("RunService").RenderStepped:Connect(function()
