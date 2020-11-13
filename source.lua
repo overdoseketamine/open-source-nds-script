@@ -55,19 +55,23 @@ end
 
 pcall(function()
 	coroutine.resume(coroutine.create(function()
-		local lastvalue = ""
-		while wait(0.05) do
-			if lastvalue ~= SurvivalTag.Value then
-				lastvalue = SurvivalTag.Value
+		SurvivalTag = game:GetService("Players").LocalPlayer.Character:WaitForChild("SurvivalTag")
+		if shared.notifyChanges == true then
+			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
+				Text = string.format("{System} The upcoming disaster will be a %s", SurvivalTag.Value),
+				Color = Color3.fromRGB(255, 235, 85),
+				Font = Enum.Font.SourceSansBold
+			})
+			SurvivalTag:GetPropertyChangedSignal("Value"):Connect(function()
 				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
 					Text = string.format("{System} The upcoming disaster will be a %s", SurvivalTag.Value),
 					Color = Color3.fromRGB(255, 235, 85),
 					Font = Enum.Font.SourceSansBold
-				});
-				if shared.broadcastDisaster == true then
-					game:GetService("ReplicatedStorage")["DefaultChatSystemChatEvents"].SayMessageRequest:FireServer(string.format("[LuminentialBot]: The upcoming disaster will be a %s", SurvivalTag.Value),"All");
-				end;
-			end
+				})
+			end)
+		end
+		if shared.broadcastDisaster == true then
+			game:GetService("ReplicatedStorage")["DefaultChatSystemChatEvents"].SayMessageRequest:FireServer(string.format("[LuminentialBot]: The upcoming disaster will be a %s", SurvivalTag.Value),"All")
 		end
 	end))
 	coroutine.resume(coroutine.create(function()
@@ -85,19 +89,23 @@ end)
 
 game:GetService("Players").LocalPlayer.CharacterAdded:Connect(function(Character)
 	coroutine.resume(coroutine.create(function()
-		local lastvalue = ""
-		while wait(0.05) do
-			if lastvalue ~= SurvivalTag.Value then
-				lastvalue = SurvivalTag.Value
+		SurvivalTag = game:GetService("Players").LocalPlayer.Character:WaitForChild("SurvivalTag")
+		if shared.notifyChanges == true then
+			game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
+				Text = string.format("{System} The upcoming disaster will be a %s", SurvivalTag.Value),
+				Color = Color3.fromRGB(255, 235, 85),
+				Font = Enum.Font.SourceSansBold
+			})
+			SurvivalTag:GetPropertyChangedSignal("Value"):Connect(function()
 				game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage",{
 					Text = string.format("{System} The upcoming disaster will be a %s", SurvivalTag.Value),
 					Color = Color3.fromRGB(255, 235, 85),
 					Font = Enum.Font.SourceSansBold
-				});
-				if shared.broadcastDisaster == true then
-					game:GetService("ReplicatedStorage")["DefaultChatSystemChatEvents"].SayMessageRequest:FireServer(string.format("[LuminentialBot]: The upcoming disaster will be a %s", SurvivalTag.Value),"All");
-				end;
-			end
+				})
+			end)
+		end
+		if shared.broadcastDisaster == true then
+			game:GetService("ReplicatedStorage")["DefaultChatSystemChatEvents"].SayMessageRequest:FireServer(string.format("[LuminentialBot]: The upcoming disaster will be a %s", SurvivalTag.Value),"All")
 		end
 	end))
 	coroutine.resume(coroutine.create(function()
