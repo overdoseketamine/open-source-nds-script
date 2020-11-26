@@ -18,18 +18,11 @@ end);
 
 shared.ua = {};
 
--- for some reason this doesn't work for my custom exploit
---[[for index, part in pairs(workspace:GetDescendants()) do
+for index, part in pairs(workspace:GetDescendants()) do
     if part:IsA("Part") and part.Anchored == false and part:IsDescendantOf(game:GetService("Players").LocalPlayer.Character) == false then
         table.insert(shared.ua,part)
     end
-end]]
-
-table.foreach(workspace:GetDescendants(), function(a,b)
-	if b:IsA("Part") and b.Anchored == false and b:IsDescendantOf(game:GetService("Players").LocalPlayer.Character) == false then
-		table.insert(shared.ua,b);
-	end
-end);
+end
   
 for i = 1, #shared.ua do
     shared.ua[i].Parent = workspace
