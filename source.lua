@@ -168,6 +168,18 @@ game:GetService("RunService").RenderStepped:Connect(function()
 		game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").RotVelocity = Vector3.new(0, 0, 0)
 		game:GetService("Players").LocalPlayer.Character:FindFirstChild("HumanoidRootPart").Velocity = Vector3.new(0, 0, 0)
 	end)
+	pcall(function()
+		if game:GetService("Players").LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):FindFirstChild("SandStormGui") then
+		    game:GetService("Players").LocalPlayer:FindFirstChildWhichIsA("PlayerGui")["SandStormGui"].Enabled = false
+		end
+		if game:GetService("Players").LocalPlayer:FindFirstChildWhichIsA("PlayerGui"):FindFirstChild("BlizzardGui") then
+		    game:GetService("Players").LocalPlayer:FindFirstChildWhichIsA("PlayerGui")["BlizzardGui"].Enabled = false
+		end
+		game:GetService("Lighting").FogColor = Color3.fromRGB(255, 255, 255)
+		game:GetService("Lighting").FogEnd = 1e4
+		game:GetService("Lighting").FogStart = game:GetService("Lighting").FogEnd - 1
+		pcall(function() workspace.Structure.Cloud:Destroy() end)
+    	end)
 end)
 
 game:GetService("Players").LocalPlayer.Chatted:connect(function(msg)
