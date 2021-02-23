@@ -9,11 +9,16 @@ https://www.roblox.com/games/189707/Natural-Disaster-Survival
 local uis = game:GetService("UserInputService");
 
 if shared.partcontrol == true then
-game:GetService("RunService").Stepped:connect(function()
-    -- this function requires a compatible exploit (Synapse, Sentinel, etc.)
-    setsimulationradius(math.pow(math.huge,math.huge)*math.huge, math.pow(math.huge,math.huge)*math.huge);
-    wait();
-end);
+
+--net by stan / activeware
+spawn(function()
+   while true do game:GetService("RunService").Heartbeat:wait()
+       settings().Physics.AllowSleep = false
+       settings().Physics.ThrottleAdjustTime = math.huge-math.huge
+setsimulationradius(1e9, 1e9)
+           game:GetService("RunService").Stepped:wait()
+   end
+end)
 
 shared.ua = {};
   
