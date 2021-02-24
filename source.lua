@@ -7,19 +7,20 @@ https://www.roblox.com/games/189707/Natural-Disaster-Survival
 ]]
 
 local uis = game:GetService("UserInputService");
-local mouse = game:GetService("Players").LocalPlayer:GetMouse();
+local plr = game:GetService("Players").LocalPlayer;
+local mouse = plr:GetMouse();
+
+if setfflag ~= nil then
+   setfflag("ObeyTheSimLimit", "False");
+end
 
 if shared.partcontrol == true then
 
---net by stan / activeware
-spawn(function()
-   while true do game:GetService("RunService").Heartbeat:wait()
-       settings().Physics.AllowSleep = false
-       settings().Physics.ThrottleAdjustTime = math.huge-math.huge
-setsimulationradius(1e9, 1e9)
-           game:GetService("RunService").Stepped:wait()
-   end
-end)
+game:GetService("RunService").RenderStepped:Connect(function()
+    plr.ReplicationFocus = workspace;
+    setsimulationradius(9e9, 9e9);
+    settings().Physics.AllowSleep = false;
+end);
 
 shared.ua = {};
 
