@@ -10,16 +10,12 @@ local uis = game:GetService("UserInputService");
 local plr = game:GetService("Players").LocalPlayer;
 local mouse = plr:GetMouse();
 
-if setfflag ~= nil then
-   setfflag("ObeyTheSimLimit", "False");
-end
-
 if shared.partcontrol == true then
 
-game:GetService("RunService").RenderStepped:Connect(function()
-    plr.ReplicationFocus = workspace;
-    setsimulationradius(9e9, 9e9);
-    settings().Physics.AllowSleep = false;
+game:GetService('RunService').Stepped:Connect(function()
+   pcall(function()
+      sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 1000);
+   end);
 end);
 
 shared.ua = {};
