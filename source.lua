@@ -12,13 +12,16 @@ local mouse = plr:GetMouse();
 
 if shared.partcontrol == true then
 
+shared.ua = {};
+	
 game:GetService('RunService').Stepped:Connect(function()
    pcall(function()
       sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 1000);
+      for i = 1, #shared.ua do
+	  shared.ua[i].Velocity = Vector3.new(30, 0, 0);
+      end;
    end);
 end);
-
-shared.ua = {};
 
 for index, part in pairs(workspace:GetDescendants()) do
     if part:IsA("Part") and part.Anchored == false and part:IsDescendantOf(game:GetService("Players").LocalPlayer.Character) == false then
