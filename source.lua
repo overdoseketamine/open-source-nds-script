@@ -10,15 +10,11 @@ local uis = game:GetService("UserInputService");
 
 if shared.partcontrol == true then
 
---net by stan / activeware
-spawn(function()
-   while true do game:GetService("RunService").Heartbeat:wait()
-       settings().Physics.AllowSleep = false
-       settings().Physics.ThrottleAdjustTime = math.huge-math.huge
-setsimulationradius(1e9, 1e9)
-           game:GetService("RunService").Stepped:wait()
-   end
-end)
+game:GetService('RunService').Stepped:Connect(function()
+   pcall(function()
+      sethiddenproperty(game.Players.LocalPlayer, "SimulationRadius", 1000);
+   end);
+end);
 
 shared.ua = {};
   
